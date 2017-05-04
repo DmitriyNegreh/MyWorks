@@ -9,10 +9,12 @@
 import UIKit
 
 class APIManager {
-    class func loadNews(URL: URL, complectionHandler: @escaping ([NewsModel]?, Error?)->()) {
+    class func loadNews(_ complectionHandler: @escaping ([NewsModel]?, Error?)->()) {
         let sessionConfig = URLSessionConfiguration.default
         let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
-        var request = URLRequest(url: URL)
+        let url = URL(string: "https://api.tinkoff.ru/v1/news")
+        guard let newsURL = url else {return}
+        var request = URLRequest(url: newsURL)
         request.httpMethod = "GET"
         request.timeoutInterval = 10
         let task = session.dataTask(with: request) { data, response, error in

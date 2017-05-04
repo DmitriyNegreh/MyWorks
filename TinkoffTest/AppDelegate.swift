@@ -13,11 +13,12 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var managedObjectContext: NSManagedObjectContext?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        
+        managedObjectContext = createNewsMainContext()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
@@ -25,6 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navController = UINavigationController()
         navController.viewControllers = [newsVC]
         window?.rootViewController = navController
+        
+        guard let nc =  window?.rootViewController as? UINavigationController,
+            let vc = nc.viewControllers.first as? ManagedObjectContextSettable
+            else { fatalError("wrong view controller type") }
+        vc.managedObjectContext = managedObjectContext
         
         return true
     }
@@ -97,6 +103,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
+    
+    private let StoreURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("News.news")
+    
+    public func createNewsMainContext() -> NSManagedObjectContext {
+        let bundles = [Bundle(for: News.self)]
+        guard let model = NSManagedObjectModel.mergedModel(from: bundles) else { fatalError("model not found") }
+        let psc = NSPersistentStoreCoordinator(managedObjectModel: model)
+        try! psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: StoreURL, options: nil)
+        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        context.persistentStoreCoordinator = psc
+        return context
+    }
 }
 
+protocol ManagedObjectContextSettable: class {
+    var managedObjectContext: NSManagedObjectContext! { get set }
+}

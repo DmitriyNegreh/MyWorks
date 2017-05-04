@@ -7,16 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
-class NewsTableViewController: UITableViewController {
+class NewsTableViewController: UITableViewController, ManagedObjectContextSettable,NSFetchedResultsControllerDelegate {
     
-    var newsSource = [NewsModel]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
+    var managedObjectContext: NSManagedObjectContext!
+    var newsSource = [News]()
     
     var newsTableViewRefreshControl:UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -36,47 +32,69 @@ class NewsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        newsSource = CoreDataWorks.getNews()
         tableView.addSubview(newsTableViewRefreshControl)
         newsTableViewRefreshControl.addTarget(self, action: #selector(getNews), for: .valueChanged)
         tableView.showsVerticalScrollIndicator = false
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: "cell")
         getNews()
     }
     
-    func getNews() {
+    @objc private func getNews() {
         newsTableViewRefreshControl.beginRefreshing()
-        let url = URL(string: "https://api.tinkoff.ru/v1/news")
-        if let newsURL = url {
-            APIManager.loadNews(URL: newsURL) { [weak self] arrayOfNews, error in
-                
-                guard error == nil else {
-                    let alert = UIAlertController(title: "Ошибка", message: "\(error!.localizedDescription)", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { (alert: UIAlertAction!) in
-                        DispatchQueue.main.async {
-                            self?.newsTableViewRefreshControl.endRefreshing()
-                        }
-                    }))
-                    self?.present(alert, animated: true, completion: nil)
-                    return
-                }
-                
-                if let newsVC = self {
-                    if let news = arrayOfNews {
-                        CoreDataWorks.saveNews(news)
-                        newsVC.newsSource = newsVC.sortNewsByDate(CoreDataWorks.getNews())
+        APIManager.loadNews() { [weak self] arrayOfNews, error in
+            
+            guard error == nil else {
+                let alert = UIAlertController(title: "Ошибка", message: "\(error!.localizedDescription)", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { (alert: UIAlertAction!) in
+                    DispatchQueue.main.async {
+                        self?.newsTableViewRefreshControl.endRefreshing()
                     }
-                }
-                DispatchQueue.main.async {
-                    self?.newsTableViewRefreshControl.endRefreshing()
-                }
+                }))
+                self?.present(alert, animated: true, completion: nil)
+                return
             }
+            self?.insertDataInCD(arrayOfNews)
         }
     }
     
-    func sortNewsByDate(_ newsSource:[NewsModel]) -> [NewsModel] {
-        let sortedArray = newsSource.sorted{$0.publicationDate > $1.publicationDate}
-        return sortedArray
+    private func insertDataInCD(_ arrayOfNews: [NewsModel]?) {
+        
+        let objectsOnDisc = fetchObject()
+        
+        if let news = arrayOfNews {
+            for nw in news {
+                if objectsOnDisc.contains(where: { $0.id == nw.id}) {} else {
+                    managedObjectContext.performChanges {
+                        _ = News.insertIntoContext(moc: self.managedObjectContext, newsModel: nw)
+                    }
+                }
+            }
+        }
+        setupTableView()
+    }
+    
+    private func setupTableView() {
+        newsSource = fetchObject()
+        DispatchQueue.main.async {
+            self.newsTableViewRefreshControl.endRefreshing()
+            self.tableView.reloadData()
+        }
+    }
+    
+    private func fetchObject() -> [News] {
+        let request = News.sortedFetchRequest
+        request.returnsObjectsAsFaults = false
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController.delegate = self
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            let fetchError = error as NSError
+            print("Unable to Perform Fetch Request")
+            print("\(fetchError), \(fetchError.localizedDescription)")
+        }
+        return  fetchedResultsController.fetchedObjects as? [News] ?? [News]()
     }
     
     //MARK: - TableView data source methods
@@ -85,7 +103,7 @@ class NewsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! NewsTableViewCell
         return cell
     }
     
@@ -100,7 +118,8 @@ class NewsTableViewController: UITableViewController {
     
     //MARK: - TableView delegate methods
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.textLabel?.text = newsSource[indexPath.row].header
+        if let newsCell = cell as? NewsTableViewCell {
+            newsCell.configure(for: newsSource[indexPath.row])
+        }
     }
 }
-

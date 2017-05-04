@@ -7,18 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C8512EF1EB38BA0003AD4CD /* TinkoffTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C8512ED1EB38BA0003AD4CD /* TinkoffTest.xcdatamodeld */; };
 		2C8DF1FD1EAE7B000005CB64 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8DF1FC1EAE7B000005CB64 /* APIManager.swift */; };
 		2C8DF2001EAE99970005CB64 /* APIResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8DF1FF1EAE99970005CB64 /* APIResponseParser.swift */; };
 		2C8DF2091EAF82550005CB64 /* CoreDataWorks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8DF2081EAF82550005CB64 /* CoreDataWorks.swift */; };
 		2CE4F7911EAE50BC00A64655 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE4F7901EAE50BC00A64655 /* AppDelegate.swift */; };
 		2CE4F7931EAE50BC00A64655 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE4F7921EAE50BC00A64655 /* NewsTableViewController.swift */; };
-		2CE4F7991EAE50BC00A64655 /* TinkoffTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CE4F7971EAE50BC00A64655 /* TinkoffTest.xcdatamodeld */; };
 		2CE4F79B1EAE50BC00A64655 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CE4F79A1EAE50BC00A64655 /* Assets.xcassets */; };
 		2CE4F79E1EAE50BC00A64655 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CE4F79C1EAE50BC00A64655 /* LaunchScreen.storyboard */; };
 		2CE4F7A91EAE50BD00A64655 /* TinkoffTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE4F7A81EAE50BD00A64655 /* TinkoffTestTests.swift */; };
 		2CE4F7B41EAE50BD00A64655 /* TinkoffTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE4F7B31EAE50BD00A64655 /* TinkoffTestUITests.swift */; };
 		2CE4F7C41EAE548E00A64655 /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE4F7C31EAE548D00A64655 /* NewsDetailViewController.swift */; };
 		2CE4F7C61EAE5CE800A64655 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE4F7C51EAE5CE800A64655 /* NewsModel.swift */; };
+		2CF51F8A1EB8AD4B00503734 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF51F891EB8AD4B00503734 /* NewsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,13 +40,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C8512EE1EB38BA0003AD4CD /* Entities.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Entities.xcdatamodel; sourceTree = "<group>"; };
 		2C8DF1FC1EAE7B000005CB64 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		2C8DF1FF1EAE99970005CB64 /* APIResponseParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResponseParser.swift; sourceTree = "<group>"; };
 		2C8DF2081EAF82550005CB64 /* CoreDataWorks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataWorks.swift; sourceTree = "<group>"; };
 		2CE4F78D1EAE50BC00A64655 /* TinkoffTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinkoffTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE4F7901EAE50BC00A64655 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CE4F7921EAE50BC00A64655 /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
-		2CE4F7981EAE50BC00A64655 /* TinkoffTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TinkoffTest.xcdatamodel; sourceTree = "<group>"; };
 		2CE4F79A1EAE50BC00A64655 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CE4F79D1EAE50BC00A64655 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2CE4F79F1EAE50BC00A64655 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,6 +58,7 @@
 		2CE4F7B51EAE50BD00A64655 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CE4F7C31EAE548D00A64655 /* NewsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
 		2CE4F7C51EAE5CE800A64655 /* NewsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
+		2CF51F891EB8AD4B00503734 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 			children = (
 				2CE4F7C31EAE548D00A64655 /* NewsDetailViewController.swift */,
 				2CE4F7921EAE50BC00A64655 /* NewsTableViewController.swift */,
+				2CF51F891EB8AD4B00503734 /* NewsTableViewCell.swift */,
 				2CE4F7C51EAE5CE800A64655 /* NewsModel.swift */,
 				2C8DF2081EAF82550005CB64 /* CoreDataWorks.swift */,
 				2C8DF2011EAE999E0005CB64 /* Network */,
@@ -148,10 +151,10 @@
 			isa = PBXGroup;
 			children = (
 				2CE4F79C1EAE50BC00A64655 /* LaunchScreen.storyboard */,
-				2CE4F7971EAE50BC00A64655 /* TinkoffTest.xcdatamodeld */,
 				2CE4F79F1EAE50BC00A64655 /* Info.plist */,
 				2CE4F79A1EAE50BC00A64655 /* Assets.xcassets */,
 				2CE4F7901EAE50BC00A64655 /* AppDelegate.swift */,
+				2C8512ED1EB38BA0003AD4CD /* TinkoffTest.xcdatamodeld */,
 			);
 			name = SupportingFiles;
 			sourceTree = "<group>";
@@ -292,14 +295,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C8512EF1EB38BA0003AD4CD /* TinkoffTest.xcdatamodeld in Sources */,
 				2C8DF1FD1EAE7B000005CB64 /* APIManager.swift in Sources */,
 				2CE4F7C41EAE548E00A64655 /* NewsDetailViewController.swift in Sources */,
 				2C8DF2001EAE99970005CB64 /* APIResponseParser.swift in Sources */,
 				2CE4F7931EAE50BC00A64655 /* NewsTableViewController.swift in Sources */,
-				2CE4F7991EAE50BC00A64655 /* TinkoffTest.xcdatamodeld in Sources */,
 				2CE4F7911EAE50BC00A64655 /* AppDelegate.swift in Sources */,
 				2CE4F7C61EAE5CE800A64655 /* NewsModel.swift in Sources */,
 				2C8DF2091EAF82550005CB64 /* CoreDataWorks.swift in Sources */,
+				2CF51F8A1EB8AD4B00503734 /* NewsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,13 +569,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		2CE4F7971EAE50BC00A64655 /* TinkoffTest.xcdatamodeld */ = {
+		2C8512ED1EB38BA0003AD4CD /* TinkoffTest.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				2CE4F7981EAE50BC00A64655 /* TinkoffTest.xcdatamodel */,
+				2C8512EE1EB38BA0003AD4CD /* Entities.xcdatamodel */,
 			);
-			currentVersion = 2CE4F7981EAE50BC00A64655 /* TinkoffTest.xcdatamodel */;
-			path = TinkoffTest.xcdatamodeld;
+			currentVersion = 2C8512EE1EB38BA0003AD4CD /* Entities.xcdatamodel */;
+			name = TinkoffTest.xcdatamodeld;
+			path = Entities.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

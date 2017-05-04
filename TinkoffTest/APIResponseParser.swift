@@ -17,9 +17,10 @@ class APIResponseParser {
                         var currentNews = NewsModel(id: news["id"] as? String ?? "",
                                          header: news["name"] as? String ?? "",
                                          content: news["text"] as? String ?? "",
-                                         publicationDate: 0)
+                                         publicationDate: Date())
                         if let pabDate = news["publicationDate"] as? [String:Any] {
-                            currentNews.publicationDate = pabDate["milliseconds"] as? Int ?? 0
+                            let date = Date(timeIntervalSince1970: pabDate["milliseconds"] as? Double ?? 0)
+                            currentNews.publicationDate = date
                         }
                         return currentNews
                     }

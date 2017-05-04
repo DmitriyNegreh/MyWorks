@@ -12,9 +12,9 @@ struct NewsModel {
     var id: String
     var header: String
     var content: String
-    var publicationDate: Int
+    var publicationDate: Date
     
-    init(id: String, header: String, content: String, publicationDate: Int) {
+    init(id: String, header: String, content: String, publicationDate: Date) {
         self.id = id
         self.header = header
         self.content = content
